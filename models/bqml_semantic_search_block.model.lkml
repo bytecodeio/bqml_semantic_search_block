@@ -43,6 +43,12 @@ explore: product_semantic_search {
     sql_on: ${users.id} = ${products_by_user_id.id} ;;
   }
 
+  join: user_recommendations {
+    type: inner
+    relationship: one_to_many
+    sql_on: ${products_by_user_id.id} = ${user_recommendations.user_id} ;;
+  }
+
 }
 
 ### END ###
