@@ -48,7 +48,10 @@ view: user_recommendations {
       ,options => '{"fraction_lists_to_search": 0.5}'
     ) ;;
   }
-
+  dimension: pk {
+    sql: CONCAT(${user_id}, ${matched_product_sku}) ;;
+    primary_key: yes
+  }
   dimension: matched_product {}
   dimension: matched_product_id {}
   dimension: matched_product_sku {}
