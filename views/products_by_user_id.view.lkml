@@ -86,7 +86,7 @@ view: products_by_user_id {
 
   dimension: semantic_search_prompt {
     type: string
-    sql: CONCAT('Products for a ', {}, ' year old ', {}, ' customer who has purchased the following products ', {});;
+    sql: CONCAT('Products for a ', ${age}, ' year old ', ${gender}, ' customer who has purchased the following products ', ${product_name});;
   }
 
   set: detail {
