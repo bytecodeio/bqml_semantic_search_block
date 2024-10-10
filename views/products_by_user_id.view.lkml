@@ -1,25 +1,26 @@
 view: products_by_user_id {
-  derived_table: {
-    sql: -- SELECT id, age, gender, city, state, country, latitude, longitude, traffic_source
-            -- FROM `looker-labs.thelook_ecommerce.users`
-            with product_purchases as (
-            SELECT a.user_id,
-            -- STRING_AGG(a.product_id
-            -- STRING_AGG(b.brand, b.category) OVER (PARTITION BYT )
-            STRING_AGG(b.name, "  |  ") OVER (PARTITION BY user_id ORDER BY user_id) product_name
-            FROM `looker-labs.thelook_ecommerce.order_items` a
-            LEFT JOIN `looker-labs.thelook_ecommerce.products` b
-            on a.product_id = b.id
-            QUALIFY ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY user_id DESC) = 1
-            order by 1, 2 desc
-            )
+  # derived_table: {
+  #   sql: -- SELECT id, age, gender, city, state, country, latitude, longitude, traffic_source
+  #           -- FROM `looker-labs.thelook_ecommerce.users`
+  #           with product_purchases as (
+  #           SELECT a.user_id,
+  #           -- STRING_AGG(a.product_id
+  #           -- STRING_AGG(b.brand, b.category) OVER (PARTITION BYT )
+  #           STRING_AGG(b.name, "  |  ") OVER (PARTITION BY user_id ORDER BY user_id) product_name
+  #           FROM `looker-labs.thelook_ecommerce.order_items` a
+  #           LEFT JOIN `looker-labs.thelook_ecommerce.products` b
+  #           on a.product_id = b.id
+  #           QUALIFY ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY user_id DESC) = 1
+  #           order by 1, 2 desc
+  #           )
 
-            SELECT id, age, gender, city, state, country, latitude, longitude, traffic_source, b.product_name
-            FROM `looker-labs.thelook_ecommerce.users` a
-            LEFT JOIN product_purchases b
-            on a.id = b.user_id
-            order by 1 asc ;;
-  }
+  #           SELECT id, age, gender, city, state, country, latitude, longitude, traffic_source, b.product_name
+  #           FROM `looker-labs.thelook_ecommerce.users` a
+  #           LEFT JOIN product_purchases b
+  #           on a.id = b.user_id
+  #           order by 1 asc ;;
+  # }
+  sql_table_name: `semantics_search.products_by_user_id` ;;
 
   measure: count {
     type: count
