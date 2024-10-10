@@ -29,6 +29,7 @@ view: products_by_user_id {
   }
 
   dimension: id {
+    primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
   }
@@ -40,7 +41,11 @@ view: products_by_user_id {
 
   dimension: gender {
     type: string
-    sql: ${TABLE}.gender ;;
+    # sql: ${TABLE}.gender ;;
+    sql: CASE WHEN ${TABLE}.gender = 'F' THEN "female"
+          ELSE "male"
+          END
+          ;;
   }
 
   dimension: city {
