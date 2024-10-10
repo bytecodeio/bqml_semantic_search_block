@@ -37,6 +37,12 @@ explore: product_semantic_search {
     sql: RIGHT JOIN ${order_items.SQL_TABLE_NAME} AS order_items_customer ON ${order_items_customer.id} = ${order_items.id} AND ${order_items.user_id} =  ${order_items_customer.user_id};;
   }
 
+  join: products_by_user_id {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${users.id} = ${products_by_user_id.id} ;;
+  }
+
 }
 
 ### END ###

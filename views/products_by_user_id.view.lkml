@@ -1,3 +1,4 @@
+explore: products_by_user_id {}
 view: products_by_user_id {
   # derived_table: {
   #   sql: -- SELECT id, age, gender, city, state, country, latitude, longitude, traffic_source
@@ -82,6 +83,12 @@ view: products_by_user_id {
     sql_latitude: ${TABLE}.latitude ;;
     sql_longitude: ${TABLE}.longitude ;;
   }
+
+  dimension: semantic_search_prompt {
+    type: string
+    sql: CONCAT('Products for a ', {}, ' year old ', {}, ' customer who has purchased the following products ', {});;
+  }
+
   set: detail {
     fields: [
       id,
