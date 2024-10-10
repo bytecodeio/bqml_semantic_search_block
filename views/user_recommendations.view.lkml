@@ -49,7 +49,7 @@ view: user_recommendations {
     ) ;;
   }
   dimension: pk {
-    sql: CONTACT(${user_id}, ${matched_product_sku}) ;;
+    sql: CONCAT(${user_id}, ${matched_product_sku}) ;;
     primary_key: yes
   }
   dimension: matched_product {}
