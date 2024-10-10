@@ -44,9 +44,9 @@ explore: product_semantic_search {
   }
 
   join: user_recommendations {
-    type: inner
+    type: full_outer
     relationship: one_to_many
-    sql_on: ${products_by_user_id.id} = ${user_recommendations.user_id} ;;
+    sql_on: ${products_by_user_id.id} = CAST(${user_recommendations.user_id} as INT64) ;;
   }
 
 }
